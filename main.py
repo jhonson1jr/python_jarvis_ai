@@ -1,3 +1,5 @@
+from ipaddress import ip_address
+
 import pyttsx3
 import speech_recognition as sr
 import keyboard
@@ -8,6 +10,7 @@ from datetime import datetime
 from decouple import config
 from random import choice
 from conv import random_text
+from online import find_my_ip, search_on_google, search_on_wikipedia, search_on_youtube
 
 engine = pyttsx3.init('sapi5')
 engine.setProperty('volume', 1.5)
@@ -88,4 +91,25 @@ while True:
             falar("Opening Discord...")
             discord_path = "C:\\Users\\Jhon\\AppData\\Local\\Discord\\app-1.0.9174\\Discord.exe"
             os.startfile(discord_path)
+        elif "ip address" in query:
+            falar("Finding your IP number...")
+            ip_address = find_my_ip()
+            falar(f"Your IP Address is {ip_address}")
+            print(f"Your IP Address is {ip_address}")
+        elif "open youtube" in query:
+            falar("What do you want to play on YouTube Sir?")
+            video = take_command().lower()
+            search_on_youtube(video)
+        elif "open google" in query:
+            falar("What do you want to search on Google Sir?")
+            search = take_command().lower()
+            search_on_google(search)
+        elif "open wikipedia" in query:
+            falar("What do you want to search on wikipedia Sir?")
+            search = take_command().lower()
+            results = search_on_wikipedia(search)
+            falar(f"According to wikiedia, {results}")
+            falar("I am printing in on terminal...")
+            print(results)
+
 
